@@ -18,8 +18,17 @@ public partial class App : Application
         base.OnStartup(e);
         DispatcherUnhandledException += App_DispatcherUnhandledException;
 
-        // Load .env file — must be first so GetEnvironmentVariable reads correct values
-        DotEnv.Load();
+        // Load .env file — check AppData/Roaming first for installed apps
+        var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        var envPath = System.IO.Path.Combine(appData, "VitalTrack", ".env");
+        if (System.IO.File.Exists(envPath))
+        {
+            DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { envPath }));
+        }
+        else
+        {
+            DotEnv.Load();
+        }
 
         var services = new ServiceCollection();
 
