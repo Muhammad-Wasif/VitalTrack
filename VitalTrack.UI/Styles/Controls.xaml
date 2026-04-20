@@ -214,6 +214,13 @@
         <Setter Property="Height"          Value="40"/>
     </Style>
 
+    <!-- ── ComboBoxItem ── -->
+    <Style TargetType="ComboBoxItem">
+        <Setter Property="Background"      Value="{StaticResource BgSecondaryBrush}"/>
+        <Setter Property="Foreground"      Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="Padding"         Value="10,8"/>
+    </Style>
+
     <!-- ── DataGrid ── -->
     <Style TargetType="DataGrid">
         <Setter Property="Background"           Value="Transparent"/>

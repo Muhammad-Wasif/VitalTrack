@@ -20,8 +20,19 @@ public class AuthService : IAuthService
             return ServiceResult<UserProfileDto>.Fail("Username and password are required.");
 
         var user = await _db.Users.FirstOrDefaultAsync(u => u.Username == request.Username.Trim().ToLower());
-        if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
+        if (user == null)
             return ServiceResult<UserProfileDto>.Fail("Invalid username or password.");
+
+        try
+        {
+            if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
+                return ServiceResult<UserProfileDto>.Fail("Invalid username or password.");
+        }
+        catch (Exception)
+        {
+            // Catch SaltParseException if the DB contains plaintext passwords from manual insertion
+            return ServiceResult<UserProfileDto>.Fail("Corrupted password hash detected. Please recreate your account.");
+        }
 
         return ServiceResult<UserProfileDto>.Ok(MapToDto(user));
     }
