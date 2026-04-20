@@ -35,7 +35,7 @@
                         <StackPanel HorizontalAlignment="Center">
                             <TextBlock Text="CONSUMED" FontSize="10" FontWeight="SemiBold"
                                        Foreground="{StaticResource TextMutedBrush}"
-                                       CharacterSpacing="120" Margin="0,0,0,8"/>
+                                        Margin="0,0,0,8"/>
                             <TextBlock x:Name="ConsumedKcal" Text="0"
                                        FontFamily="Segoe UI Black" FontSize="32"
                                        Foreground="{StaticResource AccentPinkBrush}"
@@ -51,7 +51,7 @@
                         <StackPanel HorizontalAlignment="Center">
                             <TextBlock Text="REMAINING" FontSize="10" FontWeight="SemiBold"
                                        Foreground="{StaticResource TextMutedBrush}"
-                                       CharacterSpacing="120" Margin="0,0,0,8"/>
+                                        Margin="0,0,0,8"/>
                             <TextBlock x:Name="RemainingKcal" Text="—"
                                        FontFamily="Segoe UI Black" FontSize="32"
                                        Foreground="{StaticResource AccentTealBrush}"
@@ -67,7 +67,7 @@
                         <StackPanel HorizontalAlignment="Center">
                             <TextBlock Text="PROTEIN" FontSize="10" FontWeight="SemiBold"
                                        Foreground="{StaticResource TextMutedBrush}"
-                                       CharacterSpacing="120" Margin="0,0,0,8"/>
+                                        Margin="0,0,0,8"/>
                             <TextBlock x:Name="TotalProtein" Text="0g"
                                        FontFamily="Segoe UI Black" FontSize="32"
                                        Foreground="#B08EFF" HorizontalAlignment="Center"/>
@@ -81,7 +81,7 @@
                         <StackPanel HorizontalAlignment="Center">
                             <TextBlock Text="TDEE GOAL" FontSize="10" FontWeight="SemiBold"
                                        Foreground="{StaticResource TextMutedBrush}"
-                                       CharacterSpacing="120" Margin="0,0,0,8"/>
+                                        Margin="0,0,0,8"/>
                             <TextBlock x:Name="CalorieGoal" Text="—"
                                        FontFamily="Segoe UI Black" FontSize="32"
                                        Foreground="{StaticResource AccentAmberBrush}"

@@ -16,6 +16,7 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        DispatcherUnhandledException += App_DispatcherUnhandledException;
 
         // Load .env file — must be first so GetEnvironmentVariable reads correct values
         DotEnv.Load();
@@ -42,7 +43,7 @@ public partial class App : Application
         services.AddHttpClient("ExerciseDB", c =>
         {
             c.BaseAddress = new Uri("https://exercisedb.p.rapidapi.com/");
-            var key = Environment.GetEnvironmentVariable("EXERCISEDB_API_KEY") ?? "";
+            var key = (Environment.GetEnvironmentVariable("EXERCISEDB_API_KEY") ?? "").Trim();
             if (!string.IsNullOrEmpty(key))
             {
                 c.DefaultRequestHeaders.Add("X-RapidAPI-Key", key);
@@ -85,5 +86,12 @@ public partial class App : Application
         // FIX #21: App.xaml has no StartupUri; we show LoginWindow manually here
         var loginWindow = new LoginWindow();
         loginWindow.Show();
+    }
+
+    private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+    {
+        MessageBox.Show($"UNHANDLED EXCEPTION:\n\n{e.Exception.Message}\n\nStack Trace:\n{e.Exception.StackTrace}", 
+            "VitalTrack Crash Reporter", MessageBoxButton.OK, MessageBoxImage.Error);
+        e.Handled = true; // Prevent silent crash
     }
 }

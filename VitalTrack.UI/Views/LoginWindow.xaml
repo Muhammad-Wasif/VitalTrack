@@ -62,14 +62,16 @@
             <Border Grid.Column="1" Background="{StaticResource BgPrimaryBrush}">
                 <Grid Margin="48,40">
                     <!-- Window drag + close -->
-                    <Border Height="32" VerticalAlignment="Top" HorizontalAlignment="Stretch"
-                            Background="Transparent" MouseLeftButtonDown="TitleBar_MouseDown"/>
+                    <Border Height="36" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                            Background="Transparent" Panel.ZIndex="10" MouseLeftButtonDown="TitleBar_MouseDown"/>
                     <Button Content="✕" HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Panel.ZIndex="10"
                             Width="32" Height="32" Click="CloseButton_Click"
                             Style="{StaticResource GhostButtonStyle}" Padding="0"
                             Foreground="{StaticResource TextMutedBrush}"/>
 
-                    <StackPanel VerticalAlignment="Center">
+                    <ScrollViewer Margin="0,36,0,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel VerticalAlignment="Center" Margin="0,0,16,20">
 
                         <!-- Tab switcher -->
                         <Border Background="{StaticResource BgTertiaryBrush}" CornerRadius="12"
@@ -102,13 +104,13 @@
 
                             <TextBlock Text="USERNAME" FontSize="10" FontWeight="SemiBold"
                                        Foreground="{StaticResource TextMutedBrush}"
-                                       CharacterSpacing="120" Margin="0,0,0,6"/>
+                                        Margin="0,0,0,6"/>
                             <TextBox x:Name="LoginUsernameBox" Style="{StaticResource InputFieldStyle}"
                                      Margin="0,0,0,16" KeyDown="Login_KeyDown"/>
 
                             <TextBlock Text="PASSWORD" FontSize="10" FontWeight="SemiBold"
                                        Foreground="{StaticResource TextMutedBrush}"
-                                       CharacterSpacing="120" Margin="0,0,0,6"/>
+                                        Margin="0,0,0,6"/>
                             <PasswordBox x:Name="LoginPasswordBox" Style="{StaticResource PasswordFieldStyle}"
                                          Margin="0,0,0,8" KeyDown="Login_KeyDown"/>
 
@@ -133,19 +135,19 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0">
                                     <TextBlock Text="USERNAME" FontSize="10" FontWeight="SemiBold"
-                                               Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                               Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                                     <TextBox x:Name="SuUsernameBox" Style="{StaticResource InputFieldStyle}"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2">
                                     <TextBlock Text="FULL NAME" FontSize="10" FontWeight="SemiBold"
-                                               Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                               Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                                     <TextBox x:Name="SuFullNameBox" Style="{StaticResource InputFieldStyle}"/>
                                 </StackPanel>
                             </Grid>
 
                             <!-- Email -->
                             <TextBlock Text="EMAIL" FontSize="10" FontWeight="SemiBold"
-                                       Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                       Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                             <TextBox x:Name="SuEmailBox" Style="{StaticResource InputFieldStyle}" Margin="0,0,0,14"/>
 
                             <!-- Gender + Age row -->
@@ -155,7 +157,7 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0">
                                     <TextBlock Text="GENDER" FontSize="10" FontWeight="SemiBold"
-                                               Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                               Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                                     <ComboBox x:Name="SuGenderBox" Style="{StaticResource ComboFieldStyle}">
                                         <ComboBoxItem Content="Male"   IsSelected="True"/>
                                         <ComboBoxItem Content="Female"/>
@@ -164,14 +166,14 @@
                                 </StackPanel>
                                 <StackPanel Grid.Column="2">
                                     <TextBlock Text="AGE" FontSize="10" FontWeight="SemiBold"
-                                               Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                               Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                                     <TextBox x:Name="SuAgeBox" Style="{StaticResource InputFieldStyle}" Text="25"/>
                                 </StackPanel>
                             </Grid>
 
                             <!-- Role -->
                             <TextBlock Text="ROLE" FontSize="10" FontWeight="SemiBold"
-                                       Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                       Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                             <Grid Margin="0,0,0,14">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition/>
@@ -195,13 +197,13 @@
                             <!-- Admin code (hidden until Admin selected) -->
                             <StackPanel x:Name="AdminCodePanel" Visibility="Collapsed" Margin="0,0,0,14">
                                 <TextBlock Text="ADMIN SECRET CODE" FontSize="10" FontWeight="SemiBold"
-                                           Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                           Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                                 <PasswordBox x:Name="SuAdminCodeBox" Style="{StaticResource PasswordFieldStyle}"/>
                             </StackPanel>
 
                             <!-- Password -->
                             <TextBlock Text="PASSWORD" FontSize="10" FontWeight="SemiBold"
-                                       Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                       Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                             <PasswordBox x:Name="SuPasswordBox" Style="{StaticResource PasswordFieldStyle}" Margin="0,0,0,8"/>
 
                             <TextBlock x:Name="SignupErrorText" Foreground="#FF6B8A" FontSize="12"
@@ -211,7 +213,8 @@
                                     Height="46" FontSize="14" Click="Signup_Click"/>
                         </StackPanel>
 
-                    </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </Border>
         </Grid>

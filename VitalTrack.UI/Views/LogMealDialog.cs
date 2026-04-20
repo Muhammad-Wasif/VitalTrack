@@ -153,10 +153,11 @@ public class LogMealDialog : Window
                 Foreground = Res("TextMutedBrush"),
                 Margin     = new Thickness(0, 0, 0, 6)
             });
-            box = new TextBox { Style = Sty("InputFieldStyle"), Text = def };
-            box.GotFocus  += (_, _) => { if (box.Text == "0") box.Text = ""; };
-            box.LostFocus += (_, _) => { if (string.IsNullOrWhiteSpace(box.Text)) box.Text = "0"; };
-            sp.Children.Add(box);
+            var localBox = new TextBox { Style = Sty("InputFieldStyle"), Text = def };
+            box = localBox; // assign output
+            localBox.GotFocus  += (_, _) => { if (localBox.Text == "0") localBox.Text = ""; };
+            localBox.LostFocus += (_, _) => { if (string.IsNullOrWhiteSpace(localBox.Text)) localBox.Text = "0"; };
+            sp.Children.Add(localBox);
             Grid.SetColumn(sp, col);
             nutrGrid.Children.Add(sp);
         }

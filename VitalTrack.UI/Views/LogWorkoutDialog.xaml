@@ -27,12 +27,12 @@
             <StackPanel Grid.Row="1">
                 <!-- Exercise name -->
                 <TextBlock Text="EXERCISE NAME" FontSize="10" FontWeight="SemiBold"
-                           Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                           Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                 <TextBox x:Name="ExerciseBox" Style="{StaticResource InputFieldStyle}" Margin="0,0,0,14"/>
 
                 <!-- Muscle group -->
                 <TextBlock Text="MUSCLE GROUP" FontSize="10" FontWeight="SemiBold"
-                           Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                           Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                 <ComboBox x:Name="MuscleBox" Style="{StaticResource ComboFieldStyle}" Margin="0,0,0,14">
                     <ComboBoxItem Content="Chest"/>
                     <ComboBoxItem Content="Back"/>
@@ -53,30 +53,30 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="SETS" FontSize="10" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                   Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                         <TextBox x:Name="SetsBox" Style="{StaticResource InputFieldStyle}" Text="3"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2">
                         <TextBlock Text="REPS" FontSize="10" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                   Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                         <TextBox x:Name="RepsBox" Style="{StaticResource InputFieldStyle}" Text="10"/>
                     </StackPanel>
                     <StackPanel Grid.Column="4">
                         <TextBlock Text="WEIGHT (KG)" FontSize="10" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                                   Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                         <TextBox x:Name="WeightBox" Style="{StaticResource InputFieldStyle}" Text="0"/>
                     </StackPanel>
                 </Grid>
 
                 <!-- Duration -->
                 <TextBlock Text="DURATION (MINUTES)" FontSize="10" FontWeight="SemiBold"
-                           Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                           Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                 <TextBox x:Name="DurationBox" Style="{StaticResource InputFieldStyle}"
                          Text="30" Margin="0,0,0,14"/>
 
                 <!-- Notes -->
                 <TextBlock Text="NOTES (OPTIONAL)" FontSize="10" FontWeight="SemiBold"
-                           Foreground="{StaticResource TextMutedBrush}" CharacterSpacing="120" Margin="0,0,0,6"/>
+                           Foreground="{StaticResource TextMutedBrush}"  Margin="0,0,0,6"/>
                 <TextBox x:Name="NotesBox" Style="{StaticResource InputFieldStyle}"
                          Height="60" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,8"/>
 

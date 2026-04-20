@@ -32,7 +32,7 @@
                     <StackPanel>
                         <TextBlock Text="USERS" FontSize="10" FontWeight="SemiBold"
                                    Foreground="{StaticResource TextMutedBrush}"
-                                   CharacterSpacing="120" Margin="0,0,0,6"/>
+                                    Margin="0,0,0,6"/>
                         <TextBlock x:Name="UserCountText" Text="—"
                                    FontFamily="Segoe UI Black" FontSize="22"
                                    Foreground="{StaticResource AccentTealBrush}"/>
@@ -42,7 +42,7 @@
                     <StackPanel>
                         <TextBlock Text="SESSIONS LOGGED" FontSize="10" FontWeight="SemiBold"
                                    Foreground="{StaticResource TextMutedBrush}"
-                                   CharacterSpacing="120" Margin="0,0,0,6"/>
+                                    Margin="0,0,0,6"/>
                         <TextBlock x:Name="TotalSessionsText" Text="—"
                                    FontFamily="Segoe UI Black" FontSize="22"
                                    Foreground="{StaticResource AccentPinkBrush}"/>
@@ -52,7 +52,7 @@
                     <StackPanel>
                         <TextBlock Text="MEALS LOGGED" FontSize="10" FontWeight="SemiBold"
                                    Foreground="{StaticResource TextMutedBrush}"
-                                   CharacterSpacing="120" Margin="0,0,0,6"/>
+                                    Margin="0,0,0,6"/>
                         <TextBlock x:Name="TotalNutritionText" Text="—"
                                    FontFamily="Segoe UI Black" FontSize="22"
                                    Foreground="#B08EFF"/>

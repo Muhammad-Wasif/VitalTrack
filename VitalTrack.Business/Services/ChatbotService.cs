@@ -29,7 +29,7 @@ public class ChatbotService : IChatbotService
     {
         _db     = db;
         _http   = factory.CreateClient("HuggingFace");
-        _hfApiKey = Environment.GetEnvironmentVariable("HUGGINGFACE_API_KEY") ?? "";
+        _hfApiKey = (Environment.GetEnvironmentVariable("HUGGINGFACE_API_KEY") ?? "").Trim();
     }
 
     public async Task<ChatResponse> SendMessageAsync(int userId, string message)
