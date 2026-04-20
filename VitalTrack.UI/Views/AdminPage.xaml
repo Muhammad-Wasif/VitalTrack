@@ -1,0 +1,151 @@
+<Page x:Class="VitalTrack.UI.Views.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BgPrimaryBrush}"
+      Title="Admin Panel">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24,28,28">
+
+            <!-- Admin banner -->
+            <Border Background="#1A00D4B4" BorderBrush="#3300D4B4"
+                    BorderThickness="1" CornerRadius="10"
+                    Padding="16,12" Margin="0,0,0,24">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="🛡️" FontSize="18" Margin="0,0,12,0"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="Admin — Full read/write access to all users, sessions, and nutrition logs."
+                               Foreground="{StaticResource AccentTealBrush}"
+                               FontSize="13" VerticalAlignment="Center"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Summary stat cards -->
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,8,0">
+                    <StackPanel>
+                        <TextBlock Text="USERS" FontSize="10" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   CharacterSpacing="120" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="UserCountText" Text="—"
+                                   FontFamily="Segoe UI Black" FontSize="22"
+                                   Foreground="{StaticResource AccentTealBrush}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="4,0,4,0">
+                    <StackPanel>
+                        <TextBlock Text="SESSIONS LOGGED" FontSize="10" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   CharacterSpacing="120" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="TotalSessionsText" Text="—"
+                                   FontFamily="Segoe UI Black" FontSize="22"
+                                   Foreground="{StaticResource AccentPinkBrush}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}" Margin="8,0,0,0">
+                    <StackPanel>
+                        <TextBlock Text="MEALS LOGGED" FontSize="10" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   CharacterSpacing="120" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="TotalNutritionText" Text="—"
+                                   FontFamily="Segoe UI Black" FontSize="22"
+                                   Foreground="#B08EFF"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Total calories burned across all users -->
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,20"
+                    Background="{StaticResource CardGlowPinkBrush}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="🔥" FontSize="24" Margin="0,0,16,0"
+                               VerticalAlignment="Center"/>
+                    <StackPanel>
+                        <TextBlock Text="Platform-wide calories burned" FontSize="13"
+                                   Foreground="{StaticResource TextMutedBrush}"/>
+                        <TextBlock x:Name="TotalCalBurned" Text="—"
+                                   FontFamily="Segoe UI Black" FontSize="22"
+                                   Foreground="{StaticResource AccentAmberBrush}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- All users table -->
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock Text="All Registered Users"
+                               FontFamily="Segoe UI Semibold" FontSize="15"
+                               Margin="0,0,0,16"/>
+                    <DataGrid x:Name="UsersGrid" IsReadOnly="True"
+                              AutoGenerateColumns="False" CanUserResizeColumns="True"
+                              MaxHeight="240">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Username"   Binding="{Binding Username}"    Width="120"/>
+                            <DataGridTextColumn Header="Full Name"  Binding="{Binding FullName}"    Width="*"/>
+                            <DataGridTextColumn Header="Email"      Binding="{Binding Email}"       Width="180"/>
+                            <DataGridTextColumn Header="Gender"     Binding="{Binding Gender}"      Width="75"/>
+                            <DataGridTextColumn Header="Role"       Binding="{Binding Role}"        Width="100"/>
+                            <DataGridTextColumn Header="Workouts"   Binding="{Binding TotalWorkouts}" Width="75"/>
+                            <DataGridTextColumn Header="Meals"      Binding="{Binding TotalNutritionLogs}" Width="65"/>
+                            <DataGridTextColumn Header="Joined"     Binding="{Binding JoinedDate}"  Width="110"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- Side-by-side: sessions + nutrition -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="All Workout Sessions"
+                                   FontFamily="Segoe UI Semibold" FontSize="15"
+                                   Margin="0,0,0,16"/>
+                        <DataGrid x:Name="AllSessionsGrid" IsReadOnly="True"
+                                  AutoGenerateColumns="False" MaxHeight="300">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Exercise"
+                                                    Binding="{Binding ExerciseName}" Width="*"/>
+                                <DataGridTextColumn Header="Calories"
+                                                    Binding="{Binding CaloriesDisplay}" Width="90"/>
+                                <DataGridTextColumn Header="Date"
+                                                    Binding="{Binding DateDisplay}" Width="80"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="All Nutrition Logs"
+                                   FontFamily="Segoe UI Semibold" FontSize="15"
+                                   Margin="0,0,0,16"/>
+                        <DataGrid x:Name="AllNutritionGrid" IsReadOnly="True"
+                                  AutoGenerateColumns="False" MaxHeight="300">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Food"
+                                                    Binding="{Binding FoodName}" Width="*"/>
+                                <DataGridTextColumn Header="Meal"
+                                                    Binding="{Binding MealType}" Width="80"/>
+                                <DataGridTextColumn Header="Calories"
+                                                    Binding="{Binding CalDisplay}" Width="90"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

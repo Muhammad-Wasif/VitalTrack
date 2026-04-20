@@ -1,0 +1,236 @@
+<Page x:Class="VitalTrack.UI.Views.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BgPrimaryBrush}"
+      Title="Dashboard">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24,28,28">
+
+            <!-- Greeting row -->
+            <StackPanel Margin="0,0,0,24">
+                <TextBlock x:Name="GreetingText" Text="Good morning 👋"
+                           FontFamily="Segoe UI Black" FontSize="24"/>
+                <TextBlock x:Name="DateText" Text=""
+                           Foreground="{StaticResource TextMutedBrush}"
+                           FontSize="13" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <!-- STAT CARDS ROW -->
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- BMI -->
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,10,0"
+                        Background="{StaticResource CardGlowTealBrush}">
+                    <StackPanel>
+                        <TextBlock Text="BMI" FontSize="11"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   CharacterSpacing="120" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="BmiValue" Text="—"
+                                   FontFamily="Segoe UI Black" FontSize="32"
+                                   Foreground="{StaticResource AccentTealBrush}" Margin="0,8,0,4"/>
+                        <Border Style="{StaticResource TagTealStyle}" HorizontalAlignment="Left">
+                            <TextBlock x:Name="BmiCategory" Text="—"
+                                       FontSize="11" Foreground="{StaticResource AccentTealBrush}"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- BMR -->
+                <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="5,0,5,0"
+                        Background="{StaticResource CardGlowPurpleBrush}">
+                    <StackPanel>
+                        <TextBlock Text="BMR" FontSize="11"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   CharacterSpacing="120" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="BmrValue" Text="—"
+                                   FontFamily="Segoe UI Black" FontSize="32"
+                                   Foreground="#B08EFF" Margin="0,8,0,4"/>
+                        <TextBlock Text="kcal / day at rest" FontSize="12"
+                                   Foreground="{StaticResource TextMutedBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- TDEE -->
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}" Margin="5,0,5,0"
+                        Background="{StaticResource CardGlowPinkBrush}">
+                    <StackPanel>
+                        <TextBlock Text="TDEE" FontSize="11"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   CharacterSpacing="120" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="TdeeValue" Text="—"
+                                   FontFamily="Segoe UI Black" FontSize="32"
+                                   Foreground="{StaticResource AccentAmberBrush}" Margin="0,8,0,4"/>
+                        <TextBlock Text="total daily energy" FontSize="12"
+                                   Foreground="{StaticResource TextMutedBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Today's Calories -->
+                <Border Grid.Column="3" Style="{StaticResource CardStyle}" Margin="10,0,0,0"
+                        Background="{StaticResource CardGlowPinkBrush}">
+                    <StackPanel>
+                        <TextBlock Text="TODAY'S CALORIES" FontSize="11"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   CharacterSpacing="120" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="CaloriesToday" Text="0"
+                                   FontFamily="Segoe UI Black" FontSize="32"
+                                   Foreground="{StaticResource AccentPinkBrush}" Margin="0,8,0,6"/>
+
+                        <!-- FIX #10: No hardcoded Width here — code-behind sets Width dynamically -->
+                        <Border x:Name="CalorieProgressTrack"
+                                Height="5" Background="{StaticResource BgTertiaryBrush}"
+                                CornerRadius="999">
+                            <Border x:Name="CalorieProgressFill"
+                                    HorizontalAlignment="Left"
+                                    Height="5" Width="0"
+                                    CornerRadius="999">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#7C4DFF" Offset="0"/>
+                                        <GradientStop Color="#E040A2" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </Border>
+
+                        <TextBlock x:Name="CalorieGoalText" Text="Goal: — kcal"
+                                   FontSize="11" Foreground="{StaticResource TextMutedBrush}"
+                                   Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- LOWER ROW: Sessions table + Macro bars -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Recent Sessions -->
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,16">
+                            <TextBlock Text="Recent Gym Sessions"
+                                       FontFamily="Segoe UI Semibold" FontSize="15"
+                                       VerticalAlignment="Center"/>
+                            <Button Content="View All →" HorizontalAlignment="Right"
+                                    Style="{StaticResource GhostButtonStyle}"
+                                    Click="ViewAllWorkouts_Click"/>
+                        </Grid>
+                        <DataGrid x:Name="RecentSessionsGrid"
+                                  AutoGenerateColumns="False"
+                                  CanUserResizeColumns="False"
+                                  CanUserSortColumns="False"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Exercise"
+                                                    Binding="{Binding ExerciseName}" Width="*"/>
+                                <DataGridTextColumn Header="Sets × Reps"
+                                                    Binding="{Binding SetsReps}" Width="100"/>
+                                <DataGridTextColumn Header="Weight"
+                                                    Binding="{Binding WeightDisplay}" Width="80"/>
+                                <DataGridTextColumn Header="Calories"
+                                                    Binding="{Binding CaloriesDisplay}" Width="80"/>
+                                <DataGridTextColumn Header="Date"
+                                                    Binding="{Binding DateDisplay}" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Macro Summary -->
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Today's Macros"
+                                   FontFamily="Segoe UI Semibold" FontSize="15"
+                                   Margin="0,0,0,20"/>
+
+                        <!-- Protein bar -->
+                        <StackPanel Margin="0,0,0,16">
+                            <Grid Margin="0,0,0,6">
+                                <TextBlock Text="Protein" FontSize="13"/>
+                                <TextBlock x:Name="ProteinVal" Text="0g / 0g"
+                                           HorizontalAlignment="Right"
+                                           FontSize="13" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Border Height="6" Background="{StaticResource BgTertiaryBrush}"
+                                    CornerRadius="999">
+                                <Border Width="0" x:Name="ProteinBar"
+                                        HorizontalAlignment="Left" Height="6" CornerRadius="999">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#7C4DFF" Offset="0"/>
+                                            <GradientStop Color="#B08EFF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Carbs bar -->
+                        <StackPanel Margin="0,0,0,16">
+                            <Grid Margin="0,0,0,6">
+                                <TextBlock Text="Carbs" FontSize="13"/>
+                                <TextBlock x:Name="CarbsVal" Text="0g / 0g"
+                                           HorizontalAlignment="Right"
+                                           FontSize="13" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Border Height="6" Background="{StaticResource BgTertiaryBrush}"
+                                    CornerRadius="999">
+                                <Border Width="0" x:Name="CarbsBar"
+                                        HorizontalAlignment="Left" Height="6" CornerRadius="999">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#E040A2" Offset="0"/>
+                                            <GradientStop Color="#FF7EB6" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Fat bar -->
+                        <StackPanel Margin="0,0,0,20">
+                            <Grid Margin="0,0,0,6">
+                                <TextBlock Text="Fat" FontSize="13"/>
+                                <TextBlock x:Name="FatVal" Text="0g / 0g"
+                                           HorizontalAlignment="Right"
+                                           FontSize="13" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Border Height="6" Background="{StaticResource BgTertiaryBrush}"
+                                    CornerRadius="999">
+                                <Border Width="0" x:Name="FatBar"
+                                        HorizontalAlignment="Left" Height="6" CornerRadius="999">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#00D4B4" Offset="0"/>
+                                            <GradientStop Color="#7FFFEA" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Gender note -->
+                        <Border Background="#1A00D4B4" BorderBrush="#3300D4B4"
+                                BorderThickness="1" CornerRadius="8" Padding="10,8">
+                            <TextBlock x:Name="GenderNoteText" Text=""
+                                       FontSize="11" Foreground="{StaticResource AccentTealBrush}"
+                                       TextWrapping="Wrap"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

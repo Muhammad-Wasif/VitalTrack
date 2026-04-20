@@ -1,0 +1,36 @@
+## .gitignore for VitalTrack C# WPF Solution
+
+# IMPORTANT: Never commit real secrets
+.env
+
+# Build output
+bin/
+obj/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Rider
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Entity Framework migrations (keep source, ignore generated)
+# VitalTrack.Data/Migrations/  <-- KEEP these in source control
+
+# Logs
+*.log
+logs/

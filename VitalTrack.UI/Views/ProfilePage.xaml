@@ -1,0 +1,281 @@
+<Page x:Class="VitalTrack.UI.Views.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BgPrimaryBrush}"
+      Title="Profile">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24,28,28">
+
+            <!-- Profile Hero -->
+            <Border Margin="0,0,0,24" CornerRadius="16" Padding="24" BorderThickness="1">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#1A7C4DFF" Offset="0"/>
+                        <GradientStop Color="#1AE040A2" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="#33E040A2"/>
+                </Border.BorderBrush>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Avatar circle -->
+                    <Border Grid.Column="0" Width="72" Height="72" CornerRadius="36"
+                            Background="{StaticResource AccentGradientBrush}" Margin="0,0,20,0">
+                        <TextBlock x:Name="HeroAvatar" Text="U"
+                                   FontFamily="Segoe UI Black" FontSize="22"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+
+                    <!-- Name + meta -->
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock x:Name="HeroFullName" Text="Loading…"
+                                   FontFamily="Segoe UI Black" FontSize="22"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                            <TextBlock x:Name="HeroUsername" Text="@…"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       FontSize="13" Margin="0,0,16,0"/>
+                            <Border Style="{StaticResource TagPinkStyle}">
+                                <TextBlock x:Name="HeroGender" Text="♂ Male"
+                                           FontSize="11"
+                                           Foreground="{StaticResource AccentPinkBrush}"/>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Quick metrics row -->
+                        <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                            <StackPanel Margin="0,0,28,0">
+                                <TextBlock Text="BMI" FontSize="11"
+                                           Foreground="{StaticResource TextMutedBrush}"/>
+                                <TextBlock x:Name="QuickBmi" Text="—"
+                                           FontSize="18" FontWeight="Bold"
+                                           Foreground="{StaticResource AccentTealBrush}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,0,28,0">
+                                <TextBlock Text="BMR" FontSize="11"
+                                           Foreground="{StaticResource TextMutedBrush}"/>
+                                <TextBlock x:Name="QuickBmr" Text="—"
+                                           FontSize="18" FontWeight="Bold" Foreground="#B08EFF"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="TDEE" FontSize="11"
+                                           Foreground="{StaticResource TextMutedBrush}"/>
+                                <TextBlock x:Name="QuickTdee" Text="—"
+                                           FontSize="18" FontWeight="Bold"
+                                           Foreground="{StaticResource AccentAmberBrush}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Role badge -->
+                    <Border Grid.Column="2" Style="{StaticResource TagPurpleStyle}"
+                            VerticalAlignment="Top">
+                        <TextBlock x:Name="HeroRole" Text="User"
+                                   FontSize="12" Foreground="#B08EFF"/>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Two columns -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left: edit form -->
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Physical Stats" FontFamily="Segoe UI Semibold"
+                                   FontSize="15" Margin="0,0,0,20"/>
+
+                        <Grid Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="HEIGHT (CM)" FontSize="10" FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextMutedBrush}"
+                                           CharacterSpacing="120" Margin="0,0,0,6"/>
+                                <TextBox x:Name="HeightBox" Style="{StaticResource InputFieldStyle}"
+                                         TextChanged="PhysicalStats_Changed"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="WEIGHT (KG)" FontSize="10" FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextMutedBrush}"
+                                           CharacterSpacing="120" Margin="0,0,0,6"/>
+                                <TextBox x:Name="WeightBox" Style="{StaticResource InputFieldStyle}"
+                                         TextChanged="PhysicalStats_Changed"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="BODY FAT %" FontSize="10" FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextMutedBrush}"
+                                           CharacterSpacing="120" Margin="0,0,0,6"/>
+                                <TextBox x:Name="BodyFatBox"
+                                         Style="{StaticResource InputFieldStyle}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="AGE" FontSize="10" FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextMutedBrush}"
+                                           CharacterSpacing="120" Margin="0,0,0,6"/>
+                                <TextBox x:Name="AgeBox" Style="{StaticResource InputFieldStyle}"
+                                         TextChanged="PhysicalStats_Changed"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="ACTIVITY LEVEL" FontSize="10" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   CharacterSpacing="120" Margin="0,0,0,6"/>
+                        <ComboBox x:Name="ActivityBox" Style="{StaticResource ComboFieldStyle}"
+                                  Margin="0,0,0,20"
+                                  SelectionChanged="PhysicalStats_Changed">
+                            <ComboBoxItem Content="Sedentary (office job, little exercise)"/>
+                            <ComboBoxItem Content="Lightly Active (1–3 days/week)"/>
+                            <ComboBoxItem Content="Moderately Active (3–5 days/week)"/>
+                            <ComboBoxItem Content="Very Active (6–7 days/week)"/>
+                            <ComboBoxItem Content="Extra Active (athlete / physical job)"/>
+                        </ComboBox>
+
+                        <Button Content="💾  Save Changes"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Height="46" Click="SaveProfile_Click"/>
+                        <TextBlock x:Name="SaveStatusText" Text=""
+                                   FontSize="12" HorizontalAlignment="Center"
+                                   Margin="0,10,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Right: auto-calculated metrics -->
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Auto-Calculated Metrics"
+                                   FontFamily="Segoe UI Semibold" FontSize="15"
+                                   Margin="0,0,0,20"/>
+
+                        <!-- BMI -->
+                        <Grid Margin="0,0,0,6">
+                            <TextBlock Text="BMI" FontSize="13"
+                                       Foreground="{StaticResource TextMutedBrush}"/>
+                            <TextBlock x:Name="CalcBmi" Text="—"
+                                       HorizontalAlignment="Right"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource AccentTealBrush}"/>
+                        </Grid>
+                        <Border Height="6" Background="{StaticResource BgTertiaryBrush}"
+                                CornerRadius="999" Margin="0,0,0,4">
+                            <Border x:Name="BmiBar" Width="0" HorizontalAlignment="Left"
+                                    Height="6" CornerRadius="999">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#00D4B4" Offset="0"/>
+                                        <GradientStop Color="#7FFFEA" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                        <TextBlock x:Name="BmiCatText" Text="Normal (18.5 – 24.9)"
+                                   FontSize="11"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   Margin="0,0,0,20"/>
+
+                        <!-- BMR -->
+                        <Grid Margin="0,0,0,6">
+                            <TextBlock Text="BMR (at rest)" FontSize="13"
+                                       Foreground="{StaticResource TextMutedBrush}"/>
+                            <TextBlock x:Name="CalcBmr" Text="—"
+                                       HorizontalAlignment="Right"
+                                       FontWeight="Bold" Foreground="#B08EFF"/>
+                        </Grid>
+                        <Border Height="6" Background="{StaticResource BgTertiaryBrush}"
+                                CornerRadius="999" Margin="0,0,0,20">
+                            <Border Width="150" HorizontalAlignment="Left" Height="6"
+                                    CornerRadius="999">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#7C4DFF" Offset="0"/>
+                                        <GradientStop Color="#B08EFF" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </Border>
+
+                        <!-- TDEE -->
+                        <Grid Margin="0,0,0,6">
+                            <TextBlock Text="TDEE (daily target)" FontSize="13"
+                                       Foreground="{StaticResource TextMutedBrush}"/>
+                            <TextBlock x:Name="CalcTdee" Text="—"
+                                       HorizontalAlignment="Right"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource AccentAmberBrush}"/>
+                        </Grid>
+                        <Border Height="6" Background="{StaticResource BgTertiaryBrush}"
+                                CornerRadius="999" Margin="0,0,0,20">
+                            <Border Width="195" HorizontalAlignment="Left" Height="6"
+                                    CornerRadius="999">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#FFC94D" Offset="0"/>
+                                        <GradientStop Color="#FFDE80" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </Border>
+
+                        <!-- Macro goals -->
+                        <TextBlock Text="DAILY MACRO GOALS" FontSize="10" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   CharacterSpacing="120" Margin="0,0,0,10"/>
+                        <Grid Margin="0,0,0,6">
+                            <TextBlock Text="Protein" FontSize="13"/>
+                            <TextBlock x:Name="ProteinGoal" Text="—"
+                                       HorizontalAlignment="Right"
+                                       FontSize="13" FontWeight="Bold" Foreground="#B08EFF"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,6">
+                            <TextBlock Text="Carbohydrates" FontSize="13"/>
+                            <TextBlock x:Name="CarbGoal" Text="—"
+                                       HorizontalAlignment="Right"
+                                       FontSize="13" FontWeight="Bold"
+                                       Foreground="{StaticResource AccentPinkBrush}"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,16">
+                            <TextBlock Text="Fat" FontSize="13"/>
+                            <TextBlock x:Name="FatGoal" Text="—"
+                                       HorizontalAlignment="Right"
+                                       FontSize="13" FontWeight="Bold"
+                                       Foreground="{StaticResource AccentTealBrush}"/>
+                        </Grid>
+
+                        <!-- Formula info -->
+                        <Border Background="#1A00D4B4" BorderBrush="#3300D4B4"
+                                BorderThickness="1" CornerRadius="10" Padding="14,10">
+                            <TextBlock x:Name="FormulaNote" Text=""
+                                       FontSize="11"
+                                       Foreground="{StaticResource AccentTealBrush}"
+                                       TextWrapping="Wrap"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

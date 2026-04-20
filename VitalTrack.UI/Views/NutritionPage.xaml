@@ -1,0 +1,134 @@
+<Page x:Class="VitalTrack.UI.Views.NutritionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BgPrimaryBrush}"
+      Title="Nutrition">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Action bar -->
+        <Grid Grid.Row="0" Margin="28,20,28,0">
+            <TextBlock Text="Nutrition Log" FontFamily="Segoe UI Black"
+                       FontSize="20" VerticalAlignment="Center"/>
+            <Button Content="＋  Log Meal" Style="{StaticResource PrimaryButtonStyle}"
+                    HorizontalAlignment="Right" Height="40" Click="LogMeal_Click"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,16,0,0">
+            <StackPanel Margin="28,0,28,28">
+
+                <!-- Summary cards -->
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,8,0"
+                            Background="{StaticResource CardGlowPinkBrush}">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="CONSUMED" FontSize="10" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       CharacterSpacing="120" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="ConsumedKcal" Text="0"
+                                       FontFamily="Segoe UI Black" FontSize="32"
+                                       Foreground="{StaticResource AccentPinkBrush}"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="kcal" FontSize="12"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="4,0,4,0"
+                            Background="{StaticResource CardGlowTealBrush}">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="REMAINING" FontSize="10" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       CharacterSpacing="120" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="RemainingKcal" Text="—"
+                                       FontFamily="Segoe UI Black" FontSize="32"
+                                       Foreground="{StaticResource AccentTealBrush}"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="kcal" FontSize="12"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="2" Style="{StaticResource CardStyle}" Margin="4,0,4,0"
+                            Background="{StaticResource CardGlowPurpleBrush}">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="PROTEIN" FontSize="10" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       CharacterSpacing="120" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="TotalProtein" Text="0g"
+                                       FontFamily="Segoe UI Black" FontSize="32"
+                                       Foreground="#B08EFF" HorizontalAlignment="Center"/>
+                            <TextBlock Text="today" FontSize="12"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="3" Style="{StaticResource CardStyle}" Margin="8,0,0,0">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="TDEE GOAL" FontSize="10" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       CharacterSpacing="120" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="CalorieGoal" Text="—"
+                                       FontFamily="Segoe UI Black" FontSize="32"
+                                       Foreground="{StaticResource AccentAmberBrush}"
+                                       HorizontalAlignment="Center"/>
+                            <Border x:Name="GenderDietTag" Style="{StaticResource TagTealStyle}"
+                                    HorizontalAlignment="Center" Margin="0,4,0,0">
+                                <TextBlock Text="Loading…" FontSize="10"
+                                           Foreground="{StaticResource AccentTealBrush}"/>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Meal log table with delete -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Today's Meals" FontFamily="Segoe UI Semibold"
+                                   FontSize="15" Margin="0,0,0,16"/>
+                        <DataGrid x:Name="NutritionGrid" IsReadOnly="True"
+                                  AutoGenerateColumns="False" CanUserResizeColumns="False"
+                                  SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Food"     Binding="{Binding FoodName}"   Width="*"/>
+                                <DataGridTextColumn Header="Meal"     Binding="{Binding MealType}"   Width="90"/>
+                                <DataGridTextColumn Header="Calories" Binding="{Binding CalDisplay}" Width="90"/>
+                                <DataGridTextColumn Header="Protein"  Binding="{Binding ProtDisplay}" Width="75"/>
+                                <DataGridTextColumn Header="Carbs"    Binding="{Binding CarbDisplay}" Width="75"/>
+                                <DataGridTextColumn Header="Fat"      Binding="{Binding FatDisplay}"  Width="65"/>
+                                <DataGridTextColumn Header="Serving"  Binding="{Binding ServDisplay}" Width="75"/>
+                                <DataGridTemplateColumn Header="Action" Width="75">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Remove"
+                                                    Tag="{Binding Id}"
+                                                    Click="DeleteMeal_Click"
+                                                    Style="{StaticResource GhostButtonStyle}"
+                                                    Padding="6,3" FontSize="11"
+                                                    Foreground="{StaticResource AccentPinkBrush}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

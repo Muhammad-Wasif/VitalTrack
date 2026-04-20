@@ -1,0 +1,115 @@
+<Page x:Class="VitalTrack.UI.Views.WorkoutsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BgPrimaryBrush}"
+      Title="Workouts">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top bar -->
+        <Grid Grid.Row="0" Margin="28,20,28,0">
+            <TextBlock Text="Gym Sessions" FontFamily="Segoe UI Black"
+                       FontSize="20" VerticalAlignment="Center"/>
+            <Button Content="＋  Log Session"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    HorizontalAlignment="Right" Height="40"
+                    Click="LogSession_Click"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,16,0,0">
+            <StackPanel Margin="28,0,28,28">
+
+                <!-- Gender-based exercise suggestions -->
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,16">
+                            <TextBlock Text="Gender-Suggested Exercises"
+                                       FontFamily="Segoe UI Semibold" FontSize="15"/>
+                            <!-- FIX #5: TextBlock is direct child of the Border for easy code access -->
+                            <Border x:Name="GenderExTag" HorizontalAlignment="Right"
+                                    Style="{StaticResource TagPinkStyle}" VerticalAlignment="Center">
+                                <TextBlock Text="♂ Male Program" FontSize="11"
+                                           Foreground="{StaticResource AccentPinkBrush}"/>
+                            </Border>
+                        </Grid>
+
+                        <!-- FIX #18: Replaced broken RelativeSource Command binding with
+                             a code-behind click handler via Tag-passing Button approach -->
+                        <ItemsControl x:Name="ExerciseSuggestionsGrid">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Tag="{Binding Name}"
+                                            Click="ExerciseCard_Click"
+                                            Style="{StaticResource GhostButtonRoundStyle}"
+                                            Padding="0" Margin="0,0,12,12"
+                                            Width="220" BorderThickness="1">
+                                        <Border Padding="14" CornerRadius="12"
+                                                Background="{StaticResource BgTertiaryBrush}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="44" Height="44" CornerRadius="10"
+                                                        Background="{StaticResource BgSecondaryBrush}"
+                                                        Margin="0,0,12,0">
+                                                    <TextBlock Text="🏋️" FontSize="20"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"/>
+                                                </Border>
+                                                <StackPanel VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding Name}"
+                                                               FontSize="14" FontWeight="SemiBold"
+                                                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                                                    <TextBlock Text="{Binding BodyPart}"
+                                                               FontSize="11"
+                                                               Foreground="{StaticResource TextMutedBrush}"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+
+                <!-- Session history -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Session History"
+                                   FontFamily="Segoe UI Semibold" FontSize="15"
+                                   Margin="0,0,0,16"/>
+                        <DataGrid x:Name="SessionsGrid" IsReadOnly="True"
+                                  AutoGenerateColumns="False" CanUserResizeColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Date"
+                                                    Binding="{Binding DateDisplay}" Width="100"/>
+                                <DataGridTextColumn Header="Exercise"
+                                                    Binding="{Binding ExerciseName}" Width="*"/>
+                                <DataGridTextColumn Header="Muscle"
+                                                    Binding="{Binding MuscleGroup}" Width="100"/>
+                                <DataGridTextColumn Header="Sets"
+                                                    Binding="{Binding Sets}" Width="60"/>
+                                <DataGridTextColumn Header="Reps"
+                                                    Binding="{Binding Reps}" Width="60"/>
+                                <DataGridTextColumn Header="Weight (kg)"
+                                                    Binding="{Binding WeightDisplay}" Width="100"/>
+                                <DataGridTextColumn Header="Duration"
+                                                    Binding="{Binding DurationDisplay}" Width="90"/>
+                                <DataGridTextColumn Header="Calories"
+                                                    Binding="{Binding CaloriesDisplay}" Width="90"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

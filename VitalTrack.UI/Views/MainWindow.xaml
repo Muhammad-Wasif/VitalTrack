@@ -1,0 +1,260 @@
+<Window x:Class="VitalTrack.UI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="VitalTrack"
+        Width="1280" Height="800"
+        MinWidth="1100" MinHeight="650"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <Border CornerRadius="16" ClipToBounds="True" Background="{StaticResource BgPrimaryBrush}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="48"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- TITLE BAR -->
+            <Border Grid.Row="0"
+                    Background="{StaticResource BgSecondaryBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="TitleBar_MouseDown">
+                <Grid Margin="16,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="⚡" FontSize="18" Margin="0,0,8,0"/>
+                        <TextBlock Text="VitalTrack" FontFamily="Segoe UI Black"
+                                   FontSize="15" Foreground="{StaticResource TextPrimaryBrush}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Content="─" Style="{StaticResource GhostButtonStyle}"
+                                Width="36" Height="28" Padding="0" Click="MinimizeBtn_Click"
+                                Foreground="{StaticResource TextMutedBrush}"/>
+                        <Button Content="✕" Style="{StaticResource GhostButtonStyle}"
+                                Width="36" Height="28" Padding="0" Click="CloseBtn_Click"
+                                Foreground="{StaticResource TextMutedBrush}" Margin="4,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- MAIN AREA: sidebar + content -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- SIDEBAR -->
+                <Border Grid.Column="0"
+                        Background="{StaticResource SidebarGradientBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="0,0,1,0">
+                    <DockPanel>
+                        <!-- User pill -->
+                        <Border DockPanel.Dock="Top" Margin="16,16,16,8"
+                                Background="{StaticResource BgTertiaryBrush}"
+                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                                CornerRadius="12" Padding="12">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="40" Height="40" CornerRadius="20"
+                                        Background="{StaticResource AccentGradientBrush}">
+                                    <TextBlock x:Name="SidebarAvatarText" Text="U"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               FontSize="13" FontWeight="SemiBold" Foreground="White"/>
+                                </Border>
+                                <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                                    <TextBlock x:Name="SidebarFullName" Text="User"
+                                               FontSize="13" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="SidebarRole" Text="Standard User"
+                                               FontSize="11" Foreground="{StaticResource TextMutedBrush}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Logout -->
+                        <Button DockPanel.Dock="Bottom" Click="Logout_Click"
+                                Style="{StaticResource NavButtonStyle}"
+                                Margin="8,0,8,16"
+                                Foreground="{StaticResource AccentPinkBrush}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⏏" FontSize="16" Width="24"/>
+                                <TextBlock Text="Logout" FontSize="13" Margin="8,0,0,0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Nav buttons -->
+                        <StackPanel DockPanel.Dock="Top" Margin="0,8,0,0">
+                            <Button x:Name="NavDashboard" Click="Nav_Click" Tag="Dashboard"
+                                    Style="{StaticResource NavButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📊" FontSize="16" Width="24"/>
+                                    <TextBlock Text="Dashboard" FontSize="13" Margin="8,0,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="NavProfile" Click="Nav_Click" Tag="Profile"
+                                    Style="{StaticResource NavButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="👤" FontSize="16" Width="24"/>
+                                    <TextBlock Text="My Profile" FontSize="13" Margin="8,0,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="NavNutrition" Click="Nav_Click" Tag="Nutrition"
+                                    Style="{StaticResource NavButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🥗" FontSize="16" Width="24"/>
+                                    <TextBlock Text="Nutrition" FontSize="13" Margin="8,0,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="NavWorkouts" Click="Nav_Click" Tag="Workouts"
+                                    Style="{StaticResource NavButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🏋️" FontSize="16" Width="24"/>
+                                    <TextBlock Text="Workouts" FontSize="13" Margin="8,0,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="NavAdmin" Click="Nav_Click" Tag="Admin"
+                                    Style="{StaticResource NavButtonStyle}" Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🛡️" FontSize="16" Width="24"/>
+                                    <TextBlock Text="Admin Panel" FontSize="13" Margin="8,0,0,0"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <!-- CONTENT -->
+                <Grid Grid.Column="1">
+                    <Border Height="56" VerticalAlignment="Top"
+                            Background="{StaticResource BgSecondaryBrush}"
+                            BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1"
+                            Panel.ZIndex="10">
+                        <Grid Margin="24,0">
+                            <TextBlock x:Name="PageTitleText" Text="Dashboard"
+                                       FontFamily="Segoe UI Black" FontSize="18"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    <Frame x:Name="MainFrame" Margin="0,56,0,0"
+                           NavigationUIVisibility="Hidden" Background="Transparent"/>
+                </Grid>
+            </Grid>
+
+            <!-- FLOATING CHAT WINDOW
+                 FIX #9: Grid.ColumnSpan="2" covers sidebar+content so it floats above both.
+                 Panel.ZIndex="200" keeps it above everything. -->
+            <Border x:Name="ChatWindow"
+                    Grid.Row="1" Grid.ColumnSpan="2"
+                    Width="360" Height="500"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Margin="0,0,24,90"
+                    Background="{StaticResource BgSecondaryBrush}"
+                    BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                    CornerRadius="20" Visibility="Collapsed"
+                    Panel.ZIndex="200">
+                <Border.Effect>
+                    <DropShadowEffect Color="#7C4DFF" BlurRadius="40" ShadowDepth="0" Opacity="0.3"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="56"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Chat header -->
+                    <Border Grid.Row="0" CornerRadius="20,20,0,0"
+                            Background="{StaticResource AccentGradientBrush}" Padding="16,0">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="🤖" FontSize="20" Margin="0,0,10,0"/>
+                                <StackPanel>
+                                    <TextBlock Text="FitAI Assistant"
+                                               FontWeight="SemiBold" FontSize="14" Foreground="White"/>
+                                    <TextBlock Text="Nutrition &amp; Fitness only"
+                                               FontSize="11" Foreground="#CCffffff"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Button Content="✕" HorizontalAlignment="Right"
+                                    Style="{StaticResource GhostButtonStyle}"
+                                    Foreground="White" BorderThickness="0"
+                                    Background="Transparent" Padding="8"
+                                    Click="CloseChat_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Messages -->
+                    <ScrollViewer Grid.Row="1" x:Name="ChatScrollViewer"
+                                  VerticalScrollBarVisibility="Auto" Margin="12">
+                        <StackPanel x:Name="ChatMessagesPanel">
+                            <Border Background="{StaticResource BgTertiaryBrush}"
+                                    CornerRadius="14,14,14,4" Padding="12,8"
+                                    Margin="0,0,40,8" HorizontalAlignment="Left">
+                                <TextBlock Text="Hey! I'm FitAI. Ask me anything about nutrition, gym workouts, or running! 💪"
+                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                           FontSize="13" TextWrapping="Wrap"/>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- Input row -->
+                    <Grid Grid.Row="2" Margin="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="ChatInputBox" Grid.Column="0"
+                                 Style="{StaticResource InputFieldStyle}"
+                                 Padding="12,10" FontSize="13"
+                                 KeyDown="ChatInput_KeyDown"
+                                 VerticalContentAlignment="Center"
+                                 Margin="0,0,8,0"/>
+                        <Button Grid.Column="1" Content="→"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Width="44" Height="44" Padding="0" FontSize="18"
+                                Click="SendChat_Click"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!-- FAB button — FIX: ColumnSpan="2", ZIndex=201 (above chat window) -->
+            <Button x:Name="ChatFab"
+                    Grid.Row="1" Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Margin="0,0,24,24" Width="56" Height="56"
+                    Panel.ZIndex="201"
+                    Click="ChatFab_Click" Cursor="Hand" BorderThickness="0">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#7C4DFF" Offset="0"/>
+                        <GradientStop Color="#E040A2" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="fab" Background="{TemplateBinding Background}"
+                                CornerRadius="28" Width="56" Height="56">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#E040A2" BlurRadius="20"
+                                                  ShadowDepth="0" Opacity="0.5"/>
+                            </Border.Effect>
+                            <TextBlock Text="💬" FontSize="22"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="fab" Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="fab" Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </Grid>
+    </Border>
+</Window>
