@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using VitalTrack.Business.DTOs;
 using VitalTrack.Business.Interfaces;

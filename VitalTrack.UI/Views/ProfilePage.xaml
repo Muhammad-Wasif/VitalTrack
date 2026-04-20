@@ -106,14 +106,14 @@
                             <StackPanel Grid.Column="0">
                                 <TextBlock Text="HEIGHT (CM)" FontSize="10" FontWeight="SemiBold"
                                            Foreground="{StaticResource TextMutedBrush}"
-                                           CharacterSpacing="120" Margin="0,0,0,6"/>
+                                            Margin="0,0,0,6"/>
                                 <TextBox x:Name="HeightBox" Style="{StaticResource InputFieldStyle}"
                                          TextChanged="PhysicalStats_Changed"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2">
                                 <TextBlock Text="WEIGHT (KG)" FontSize="10" FontWeight="SemiBold"
                                            Foreground="{StaticResource TextMutedBrush}"
-                                           CharacterSpacing="120" Margin="0,0,0,6"/>
+                                            Margin="0,0,0,6"/>
                                 <TextBox x:Name="WeightBox" Style="{StaticResource InputFieldStyle}"
                                          TextChanged="PhysicalStats_Changed"/>
                             </StackPanel>
@@ -128,14 +128,14 @@
                             <StackPanel Grid.Column="0">
                                 <TextBlock Text="BODY FAT %" FontSize="10" FontWeight="SemiBold"
                                            Foreground="{StaticResource TextMutedBrush}"
-                                           CharacterSpacing="120" Margin="0,0,0,6"/>
+                                            Margin="0,0,0,6"/>
                                 <TextBox x:Name="BodyFatBox"
                                          Style="{StaticResource InputFieldStyle}"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2">
                                 <TextBlock Text="AGE" FontSize="10" FontWeight="SemiBold"
                                            Foreground="{StaticResource TextMutedBrush}"
-                                           CharacterSpacing="120" Margin="0,0,0,6"/>
+                                            Margin="0,0,0,6"/>
                                 <TextBox x:Name="AgeBox" Style="{StaticResource InputFieldStyle}"
                                          TextChanged="PhysicalStats_Changed"/>
                             </StackPanel>
@@ -143,7 +143,7 @@
 
                         <TextBlock Text="ACTIVITY LEVEL" FontSize="10" FontWeight="SemiBold"
                                    Foreground="{StaticResource TextMutedBrush}"
-                                   CharacterSpacing="120" Margin="0,0,0,6"/>
+                                    Margin="0,0,0,6"/>
                         <ComboBox x:Name="ActivityBox" Style="{StaticResource ComboFieldStyle}"
                                   Margin="0,0,0,20"
                                   SelectionChanged="PhysicalStats_Changed">
@@ -242,7 +242,7 @@
                         <!-- Macro goals -->
                         <TextBlock Text="DAILY MACRO GOALS" FontSize="10" FontWeight="SemiBold"
                                    Foreground="{StaticResource TextMutedBrush}"
-                                   CharacterSpacing="120" Margin="0,0,0,10"/>
+                                    Margin="0,0,0,10"/>
                         <Grid Margin="0,0,0,6">
                             <TextBlock Text="Protein" FontSize="13"/>
                             <TextBlock x:Name="ProteinGoal" Text="—"

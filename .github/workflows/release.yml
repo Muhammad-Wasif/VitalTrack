@@ -1,0 +1,53 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore "VitalTrack.sln"
+
+      - name: Publish Self-Contained Executable
+        run: dotnet publish "VitalTrack.UI\VitalTrack.UI.csproj" -c Release -r win-x64 --self-contained true -o "publish" /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:EnableCompressionInSingleFile=true
+
+      - name: Compile Inno Setup Installer
+        run: |
+          & "C:\Program Files (x86)\Inno Setup 6\iscc.exe" installer.iss
+
+      - name: Create Release and Upload Assets
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            publish/VitalTrack.exe
+            .env.example
+            Output/VitalTrack_Setup.exe
+          generate_release_notes: true
+
+      - name: Upload Workflow Artifact (for manual triggers)
+        uses: actions/upload-artifact@v4
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          name: VitalTrack-Release-Assets
+          path: |
+            publish/VitalTrack.exe
+            .env.example
+            Output/VitalTrack_Setup.exe

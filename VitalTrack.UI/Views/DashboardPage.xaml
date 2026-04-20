@@ -31,7 +31,7 @@
                     <StackPanel>
                         <TextBlock Text="BMI" FontSize="11"
                                    Foreground="{StaticResource TextMutedBrush}"
-                                   CharacterSpacing="120" FontWeight="SemiBold"/>
+                                    FontWeight="SemiBold"/>
                         <TextBlock x:Name="BmiValue" Text="—"
                                    FontFamily="Segoe UI Black" FontSize="32"
                                    Foreground="{StaticResource AccentTealBrush}" Margin="0,8,0,4"/>
@@ -48,7 +48,7 @@
                     <StackPanel>
                         <TextBlock Text="BMR" FontSize="11"
                                    Foreground="{StaticResource TextMutedBrush}"
-                                   CharacterSpacing="120" FontWeight="SemiBold"/>
+                                    FontWeight="SemiBold"/>
                         <TextBlock x:Name="BmrValue" Text="—"
                                    FontFamily="Segoe UI Black" FontSize="32"
                                    Foreground="#B08EFF" Margin="0,8,0,4"/>
@@ -63,7 +63,7 @@
                     <StackPanel>
                         <TextBlock Text="TDEE" FontSize="11"
                                    Foreground="{StaticResource TextMutedBrush}"
-                                   CharacterSpacing="120" FontWeight="SemiBold"/>
+                                    FontWeight="SemiBold"/>
                         <TextBlock x:Name="TdeeValue" Text="—"
                                    FontFamily="Segoe UI Black" FontSize="32"
                                    Foreground="{StaticResource AccentAmberBrush}" Margin="0,8,0,4"/>
@@ -78,7 +78,7 @@
                     <StackPanel>
                         <TextBlock Text="TODAY'S CALORIES" FontSize="11"
                                    Foreground="{StaticResource TextMutedBrush}"
-                                   CharacterSpacing="120" FontWeight="SemiBold"/>
+                                    FontWeight="SemiBold"/>
                         <TextBlock x:Name="CaloriesToday" Text="0"
                                    FontFamily="Segoe UI Black" FontSize="32"
                                    Foreground="{StaticResource AccentPinkBrush}" Margin="0,8,0,6"/>

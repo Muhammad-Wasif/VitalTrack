@@ -14,7 +14,7 @@ out/
 *.suo
 *.userosscache
 *.sln.docstates
-
+publish
 # NuGet
 *.nupkg
 packages/
