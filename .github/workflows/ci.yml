@@ -1,0 +1,29 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore "VitalTrack.sln"
+
+      - name: Build Code
+        run: dotnet build "VitalTrack.sln" --no-restore -c Release
+
+      - name: UI Compilation Check
+        run: dotnet publish "VitalTrack.UI\VitalTrack.UI.csproj" -c Release -r win-x64 --self-contained false -o "validation_build"
